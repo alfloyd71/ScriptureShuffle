@@ -1,0 +1,83 @@
+
+{% extends 'quiz/dependencies.html' %}
+{% load static %}
+{% block title %}
+Scripture Shuffle - Take a Quiz on Bible Verses From the KJV Bible
+{% endblock %}
+{% block content %}
+<style nonce="{{ request.csp_nonce }}">
+    body{
+        padding-bottom: 1em;
+    }
+    #displaytimer{
+        text-align: right;
+    }
+</style>
+<div class="container ">
+<h1>Scripture Shuffle</h1>
+
+{% if flag_dbempty %}
+{{ dbempty_message }}
+{% else %}
+<strong>Verses Updated: {{ update_date }}</strong>
+<div align="right " id="displaytimer">
+    <b>Timer: 0 seconds</b>
+</div>
+{% endif %}
+
+ <form method='post'>
+    {% csrf_token %}
+    {% for q  in questions%}
+    <div class="form-group">
+      <label for="question">{{q.question}}</label>
+    </div>
+    <div class="form-check">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option1" checked>
+
+                {{q.op1}}
+
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="option2">
+                {{q.op2}}
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios3" value="option3">
+                {{q.op3}}
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios4" value="option4">
+                {{q.op4}}
+        </div>
+        <br>
+    </div>
+    {% endfor %}
+    <input id='timer' type='hidden' name="timer" value="">
+    <br>
+    {% if not flag_dbempty %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {% endif %}
+  </form>
+
+{% endblock content %}
+
+{% block script %}
+        <script nonce="{{ request.csp_nonce }}">
+
+            const timer=document.getElementById('displaytimer')
+            console.log(timer.textContent)
+            const inputtag = document.getElementById('timer')
+
+            t=0
+            setInterval(()=>{
+                t+=1
+                timer.innerHTML ="<b>Timer: " +t+" seconds</b>"
+                inputtag.value = t
+            },1000)
+        </script>
+{% endblock script %}
+
+</div>
+
+

@@ -1,0 +1,64 @@
+{% extends 'quiz/dependencies.html' %}
+{% load static %}
+{% block title %}
+Bible Quiz - Here are the results.
+{% endblock %}
+{% block content %}
+<style nonce="{{request.csp_nonce}}">
+    #cardcolumns{
+        padding: 10px;margin: 20px;
+    }
+    #card{
+        width: 32rem;border: 5px black solid;
+    }
+  
+</style>
+<div class="container">
+
+    <div id = "cardcolumns" class="card-columns">
+
+        <div id= "card" class="card">
+            <img class="card-img-top" src="/static/quiz/images/bible.png" alt="bible png">
+            <div class="card-body">
+                <h5 class="card-title">Score: {{score}}</h5>
+
+                <p class="card-text">Percentage: {{percent}}%</p>
+                <p class="card-text">Time Taken: {{time}} seconds</p>
+                <p class="card-text">Correct answers: {{correct}}</p>
+                <p class="card-text">Wrong answers: {{wrong}}</p>
+                <p class="card-text">Total questions: {{total}}</p>
+                <details>
+                    <summary>Correct Answers</summary>
+                    {% for each_correct_answer in correct_answers %}
+                    <ul><li>{{ each_correct_answer }}</li></ul>
+                    {% endfor %}
+                </details>
+                <details>
+                    <summary>Wrong Answers</summary>
+                    {% for each_wrong_answer in wrong_answers %}
+                    <ul><li>{{ each_wrong_answer }}</li></ul>
+                    {% endfor %}
+                </details>
+                <h5>All the best for <a id="takeAnotherQuiz" href="{% url 'getQuiz' %}">next quiz!</a></h5>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script nonce = "{{ request.csp_nonce }}">
+    // Check if the device is a mobile phone
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        let card = document.getElementById("card")
+        card.style.width="100%"
+        console.log("This app is running on a mobile device.")
+    }
+    else{
+        console.log("This app is not running on a mobile device.")
+    }
+</script>
+
+{% endblock script %}
