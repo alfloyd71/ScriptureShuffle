@@ -13,6 +13,8 @@ Add multiple choice verses in Admin like so:
 
 The QuesModel Model as already been registered and should show up in Admin for editing
 
+![AdminQuesmodelScreenshot2.png](https://www.freesmartphoneapps.com/static/projects/images/AdminQuesmodelScreenshot2.png)
+
 
 https://www.freesmartphoneapps.com/biblequiz/
 
