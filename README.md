@@ -7,7 +7,11 @@ pip install pythonbible
 
 ![BibleQuizAndroid.png](https://www.freesmartphoneapps.com/static/projects/images/BibleQuizAndroid.png)
 
+Add multiple choice verses in Admin like so:
+
 ![AdminQuesmodelScreenshot1.png](https://www.freesmartphoneapps.com/static/projects/images/AdminQuesmodelScreenshot.png)
+
+The QuesModel Model as already been registered and should show up in Admin for editing
 
 
 https://www.freesmartphoneapps.com/biblequiz/
