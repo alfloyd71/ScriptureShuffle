@@ -7,6 +7,9 @@ pip install pythonbible
 
 ![BibleQuizAndroid.png](https://www.freesmartphoneapps.com/static/projects/images/BibleQuizAndroid.png)
 
+!AdminQuesmodelScreenshot1.png[](https://www.freesmartphoneapps.com/static/projects/images/AdminQuesmodelScreenshot.png)
+
+
 https://www.freesmartphoneapps.com/biblequiz/
 
 
