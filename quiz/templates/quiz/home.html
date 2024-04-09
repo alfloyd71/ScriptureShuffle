@@ -25,15 +25,15 @@ Scripture Shuffle - Take a Quiz on Bible Verses From the KJV Bible
 </div>
 {% endif %}
 
- <form method='post'>
+ <form id="form-multiple-choice-quiz" method='post'>
     {% csrf_token %}
     {% for q  in questions%}
     <div class="form-group">
-      <label for="question">{{q.question}}</label>
+      <label class="questions-test" for="question">{{q.question}}</label>
     </div>
     <div class="form-check">
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option1" checked>
+            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option1">
 
                 {{q.op1}}
 
@@ -63,21 +63,88 @@ Scripture Shuffle - Take a Quiz on Bible Verses From the KJV Bible
 {% endblock content %}
 
 {% block script %}
-        <script nonce="{{ request.csp_nonce }}">
 
-            const timer=document.getElementById('displaytimer')
-            console.log(timer.textContent)
-            const inputtag = document.getElementById('timer')
+<script nonce="{{ request.csp_nonce }}">
+  const validateForm =()=>{
 
-            t=0
-            setInterval(()=>{
-                t+=1
-                timer.innerHTML ="<b>Timer: " +t+" seconds</b>"
-                inputtag.value = t
-            },1000)
-        </script>
+    // Select elements with the class "questions-test"
+    const questions = document.querySelectorAll(".questions-test")
+    const selections = document.querySelectorAll(".form-check-input")
+
+    const mutiple_choice_answers_length = 4
+    let checked_flag = false
+    let form_valid = true
+
+    let i=0
+
+    if(selections.length > 0){
+        selections.forEach((selection)=>{
+            i+=1
+            //console.log("selections length is ",selections.length)
+            if(selection.checked){
+                checked_flag=true
+                let selection_value = selection.value
+                console.log("Here is the selection value ",selection_value)
+            }
+            else{
+
+                if(i==mutiple_choice_answers_length){
+                    if(checked_flag==false){
+                        console.log("You haven't selected a multiple choice answer for this question ")
+                        form_valid=false
+                    }
+                    else{
+                        checked_flag=false
+                    }
+                    i=0
+                }
+            }
+                    
+        })
+            
+    }
+     
+    // Check if any elements were found
+    if (questions.length > 0) {
+        questions.forEach((question) => {
+            let text = question.textContent;
+            console.log(text);
+        });
+    } else {
+        console.log("No elements with class 'questions-test' found.");
+    }
+
+  // end function validateForm
+    return form_valid
+  }
+
+    form_multiple_choice_quiz=document.getElementById("form-multiple-choice-quiz")
+    form_multiple_choice_quiz.addEventListener(("submit"),(event)=>{
+        event.preventDefault()
+        form_valid = validateForm()
+        if(form_valid){
+            form_multiple_choice_quiz.submit()
+        }
+        else{
+            window.alert("You haven't selected a multiple choice answer for one or more questions")
+        }
+    })
+
+</script>
+
+<script nonce="{{ request.csp_nonce }}">
+
+    const timer=document.getElementById('displaytimer')
+    const inputtag = document.getElementById('timer')
+
+    let t=0
+    setInterval(()=>{
+        t+=1
+        timer.innerHTML ="<b>Timer: " +t+" seconds</b>"
+        inputtag.value = t
+    },1000)
+</script>
 {% endblock script %}
 
-</div>
 
 

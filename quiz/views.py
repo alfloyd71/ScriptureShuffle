@@ -10,7 +10,7 @@ def getQuiz(request):
 
     #negative indexing not allowed for objects.all() access
     index=len(quests)-1
-    
+
     quests_limit = []
 
     #populate list_questions with random verses
@@ -20,9 +20,9 @@ def getQuiz(request):
     # e.g., verses_limit_range = len(list_questions) would show all of the verses in the database
 
     """### WARNING - Do not set verses_limit_range = len(list_questions) unless the database has at least 1 entry
-                     or this will cause the Django server to crash. 
+                     or this will cause the Django server to crash.
        ###"""
-    verses_limit_range = 11
+    verses_limit_range = 5
     flag_dbempty = False
 
     #message to display when the database has not yet been populated like right after a fresh clone from GitHub
@@ -40,11 +40,13 @@ def getQuiz(request):
         else:
             flag_dbempty = True
             break
-    
+
 
     if request.method == 'POST':
         questions=list(request.POST.keys())[1:]
         selections=list(request.POST.values())[1:]
+        print("all questions = ", questions)
+        print("and all selections = ", selections)
 
         score=0
         wrong=0
@@ -55,7 +57,7 @@ def getQuiz(request):
         wrong_answers=[]
         correct_answers=[]
         #print ('request.POST =',request.POST)
-        
+
         for i in range(len(questions)):
             print('question is ',questions[i])
             print('choice is ',selections[i])
@@ -76,8 +78,8 @@ def getQuiz(request):
                     else:
                         wrong_answers.append(str(q)+' - '+str(q.ans))
 
-              
-                    
+
+
                 if selected=="option2":
 
                     if q.op2 == q.ans:
@@ -87,8 +89,8 @@ def getQuiz(request):
                         correct_answers.append(str(q)+' - '+str(q.ans))
                     else:
                         wrong_answers.append(str(q)+' - '+str(q.ans))
-                
-                    
+
+
                 if selected=="option3":
 
                     if q.op3 == q.ans:
@@ -98,7 +100,7 @@ def getQuiz(request):
                         correct_answers.append(str(q)+' - '+str(q.ans))
                     else:
                         wrong_answers.append(str(q)+' - '+str(q.ans))
-            
+
                 if selected=="option4":
 
                     if q.op4 == q.ans:
@@ -114,12 +116,12 @@ def getQuiz(request):
                 print('Multiple questions returned for the same question text')
 
         total = len(quests_limit)
-        wrong = total - correct        
+        wrong = total - correct
         score = round((correct/total)*100)
-     
-        print('Answers you got correct: ',correct_answers)  
-        print('Answers you got wrong: ', wrong_answers) 
-        if score!=0:    
+
+        print('Answers you got correct: ',correct_answers)
+        print('Answers you got wrong: ', wrong_answers)
+        if score!=0:
             percent = score
             #percent = round(percent)
         context = {
@@ -131,15 +133,14 @@ def getQuiz(request):
             'total':total,
             'correct_answers':correct_answers,
             'wrong_answers':wrong_answers,
-            
+
         }
         return render(request,'quiz/result.html',context)
     else:
-        
+
 
         context = {
             'questions':quests_limit, 'update_date':update_date,'flag_dbempty':flag_dbempty,
             'dbempty_message':dbempty_message,
         }
         return render(request,'quiz/home.html',context)
- 
