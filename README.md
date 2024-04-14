@@ -11,12 +11,12 @@ Add multiple choice verses in Admin like so:
 
 ![AdminQuesmodelScreenshot1.png](https://www.freesmartphoneapps.com/static/projects/images/AdminQuesmodelScreenshot.png)
 
-The QuesModel Model as already been registered and should show up in Admin for editing
+The QuesModel Model has been pre-registered and should show up in Admin for editing
 
 ![AdminQuesmodelScreenshot2.png](https://www.freesmartphoneapps.com/static/projects/images/AdminQuesmodelScreenshot2.png)
 
 The final step is to customize the 'verses_limit_range' variable in the views.py file to select the desired number of multiple-choice verses for the Bible quiz. Ensure that the number of verses in the database is equal to or exceeds the value set in the 'verses_limit_range' setting; otherwise, the verses will not be displayed.
 
-https://www.freesmartphoneapps.com/biblequiz/
+https://www.freesmartphoneapps.com/scriptureshuffle/
 
 
