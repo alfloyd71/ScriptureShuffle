@@ -17,7 +17,7 @@ The QuesModel Model as already been registered and should show up in Admin for e
 
 The final step is to customize the 'verses_limit_range' variable in the views.py file to select the desired number of multiple-choice verses for the Bible quiz. Ensure that the number of verses in the database is equal to or exceeds the value set in the 'verses_limit_range' setting; otherwise, the verses will not be displayed.
 
-![BibleQuizAndroid2.png](https://www.freesmartphoneapps.com/static/projects/images/BibleQuizAndroid2.png)
+![ScriptureShuffleAndroid.png](https://www.freesmartphoneapps.com/static/projects/images/ScriptureShuffleAndroid.png)
 
 https://www.freesmartphoneapps.com/biblequiz/
 
