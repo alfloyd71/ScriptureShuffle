@@ -1,5 +1,4 @@
 {% extends 'quiz/dependencies.html' %}
-{% load static %}
 {% block title %}
 Bible Quiz - Here are the results.
 {% endblock %}
@@ -47,6 +46,21 @@ Bible Quiz - Here are the results.
 </div>
 
 {% endblock content %}
+
+<!-- footer goes here...-->
+{% block footer %}
+<footer class="footer py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-8 mx-auto text-center mt-1">
+            <p class="mb-0 text-secondary">
+                &copy2024 MyWebsite.com
+            </p>
+        </div>
+      </div>
+    </div>
+</footer>
+{% endblock %}
 
 {% block script %}
 <script nonce = "{{ request.csp_nonce }}">

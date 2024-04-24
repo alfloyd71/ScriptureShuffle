@@ -22,7 +22,7 @@ def getQuiz(request):
     """### WARNING - Do not set verses_limit_range = len(list_questions) unless the database has at least 1 entry
                      or this will cause the Django server to crash.
        ###"""
-    verses_limit_range = 3
+    verses_limit_range = 5
     flag_dbempty = False
 
     #message to display when the database has not yet been populated like right after a fresh clone from GitHub
