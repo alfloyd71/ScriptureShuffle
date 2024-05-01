@@ -1,7 +1,7 @@
 {% extends 'quiz/dependencies.html' %}
 {% block title %}
 Scripture Shuffle - Random Verse Challenge
-{% endblock %}
+{% endblock title %}
 {% block content %}
 <style nonce="{{ request.csp_nonce }}">
     body{
@@ -18,7 +18,7 @@ Scripture Shuffle - Random Verse Challenge
 {{ dbempty_message }}
 {% else %}
 <p><strong>Verses Updated: {{ update_date }}</strong></p>
-<div align="right " id="displaytimer">
+<div id="displaytimer">
     <b>Timer: 0 seconds</b>
 </div>
 {% endif %}
