@@ -7,6 +7,7 @@ import random
 def getQuiz(request):
     update_date=0
     quests=list(QuesModel.objects.all())
+    number_of_verses=len(quests)
 
     #negative indexing not allowed for objects.all() access
     index=len(quests)-1
@@ -141,6 +142,6 @@ def getQuiz(request):
 
         context = {
             'questions':quests_limit, 'update_date':update_date,'flag_dbempty':flag_dbempty,
-            'dbempty_message':dbempty_message,
+            'dbempty_message':dbempty_message, 'number_of_verses':number_of_verses, 
         }
         return render(request,'quiz/home.html',context)

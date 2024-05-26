@@ -12,12 +12,14 @@ Scripture Shuffle - Random Verse Challenge
     }
 </style>
 <div class="container ">
+    
+<!-- your own custom logo and <h1> title goes here -->
 <h1><img src="/static/quiz/images/icons/book-bible-solid.svg" alt="book-bible-solid.svg"> Scripture Shuffle</h1> is released under the MIT License, and all of its source code is available at <a target="”_blank”" rel="noopener" href="https://github.com/alfloyd71/ScriptureShuffle">https://github.com/alfloyd71/ScriptureShuffle</a>
 
 {% if flag_dbempty %}
 {{ dbempty_message }}
 {% else %}
-<p><strong>Verses Updated: {{ update_date }}</strong></p>
+<p><strong>{{ number_of_verses }} Verses Updated: {{ update_date }}</strong></p>
 <div id="displaytimer">
     <b>Timer: 0 seconds</b>
 </div>
@@ -33,20 +35,20 @@ Scripture Shuffle - Random Verse Challenge
         <div class="form-check">
             <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option1">
 
-                {{q.op1}}
+                <label for="gridRadios1">{{q.op1}}</label>
 
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="option2">
-                {{q.op2}}
+            <label for="gridRadios2">{{q.op2}}</label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios3" value="option3">
-                {{q.op3}}
+            <label for="gridRadios3">{{q.op3}}</label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios4" value="option4">
-                {{q.op4}}
+            <label for="gridRadios4">{{q.op4}}</label>
         </div>
         <br>
     </div>
