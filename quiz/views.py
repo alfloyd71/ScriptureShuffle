@@ -1,7 +1,10 @@
-from django.shortcuts import redirect,render
+from django.shortcuts import render
 from .forms import *
 from .models import *
 import random
+from django.http import JsonResponse
+
+from quiz.models import QuesModel
 
 # Create your views here.
 def getQuiz(request):

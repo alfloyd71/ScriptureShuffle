@@ -5,7 +5,7 @@ The only other requirement besides Django is to install the pythonbible package:
 
 pip install pythonbible
 
-![ScriptureShuffleAndroid.png](https://www.freesmartphoneapps.com/static/projects/images/ScriptureShuffleAndroid.png)
+![ScriptureShuffleAndroid.png](https://www.freesmartphoneapps.com/static/projects/images/ScriptureShuffleAndroid-ver1.2.png)
 ![ScriptureShuffleAndroidResult.png](https://www.freesmartphoneapps.com/static/projects/images/ScriptureShuffleAndroidResult.png)
 
 Add multiple choice verses in Admin like so:
@@ -18,6 +18,4 @@ The QuesModel Model has been pre-registered and should show up in Admin for edit
 
 The final step is to customize the 'verses_limit_range' variable in the views.py file to select the desired number of multiple-choice verses for the Bible quiz. Ensure that the number of verses in the database is equal to or exceeds the value set in the 'verses_limit_range' setting; otherwise, the verses will not be displayed.
 
-https://www.freesmartphoneapps.com/verseoftheday/
-
-
+https://www.freesmartphoneapps.com/scriptureshuffle/
