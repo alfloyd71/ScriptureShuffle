@@ -6,7 +6,6 @@ The only other requirement besides Django is to install the pythonbible package:
 pip install pythonbible
 
 ![ScriptureShuffleAndroid.png](https://www.freesmartphoneapps.com/static/projects/images/ScriptureShuffleAndroid-ver1.2.png)
-![ScriptureShuffleAndroidResult.png](https://www.freesmartphoneapps.com/static/projects/images/ScriptureShuffleAndroidResult.png)
 
 Add multiple choice verses in Admin like so:
 
