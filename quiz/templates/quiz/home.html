@@ -1,13 +1,14 @@
 {% extends 'quiz/dependencies.html' %}
+{% block description %}
+{% endblock description %}
 {% block title %}
-Scripture Shuffle - Random Verse Challenge
 {% endblock title %}
 {% block content %}
 
 <div class="container ">
     
 <!-- your own custom logo and <h1> title goes here -->
-<h1><img src="/static/quiz/images/icons/custom-logo.svg" alt="custom-logo.svg"> Scripture Shuffle</h1> is released under the MIT License, and all of its source code is available at <a target="”_blank”" rel="noopener" href="https://github.com/alfloyd71/ScriptureShuffle">https://github.com/alfloyd71/ScriptureShuffle</a>
+<h1><img src="/static/quiz/images/icons/custom-logo.svg" alt="custom-logo.svg"> Scripture Shuffle</h1> is released under the MIT License, and all of its source code is available at <a target="_blank" rel="noopener" href="https://github.com/alfloyd71/ScriptureShuffle">https://github.com/alfloyd71/ScriptureShuffle</a>
 
 {% if flag_dbempty %}
 {{ dbempty_message }}
@@ -125,13 +126,16 @@ Scripture Shuffle - Random Verse Challenge
 
 <script nonce="{{ request.csp_nonce }}">
 
-    const timer=document.getElementById('displaytimer')
-    const inputtag = document.getElementById('timer')
+    const timer=document.querySelector('#displaytimer')
+    const inputtag = document.querySelector('#timer')
 
     let t=0
-    setInterval(()=>{
-        t+=1
-        timer.innerHTML ="<b>Timer: " +t+" seconds</b>"
-        inputtag.value = t
-    },1000)
+
+    function setTimer(){
+     t+=1
+     timer.innerHTML ="<strong>Timer: " +t+" seconds</strong>"
+     inputtag.value = t
+    }
+
+    setInterval(setTimer, 1000)
 </script>
