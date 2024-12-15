@@ -14,128 +14,132 @@
 {{ dbempty_message }}
 {% else %}
 <p><strong>Database contains {{ number_of_verses }} Bible verses. Updated on: {{ update_date }}</strong></p>
-<div id="displaytimer">
+<div id="display-timer">
     <b>Timer: 0 seconds</b>
 </div>
 {% endif %}
 
- <form id="form-multiple-choice-quiz" method='post'>
-    {% csrf_token %}
-    {% for q  in questions%}
-    <div class="form-group">
-      <label class="questions-test" for="question">{{q.question}}</label>
-    </div>
-    <div class="form-check">
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="option1">
+<form id="form-multiple-choice-quiz" method="post">
+ {% csrf_token %}
 
-                <label for="gridRadios1">{{q.op1}}</label>
+ {% for q in questions %}
+ <div class="form-group">
+     <!-- Question Label -->
+     <label class="questions-test">{{ q.question }}</label>
+ </div>
 
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="option2">
-            <label for="gridRadios2">{{q.op2}}</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios3" value="option3">
-            <label for="gridRadios3">{{q.op3}}</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios4" value="option4">
-            <label for="gridRadios4">{{q.op4}}</label>
-        </div>
-        <br>
-    </div>
-    {% endfor %}
-    <input id='timer' type='hidden' name="timer" value="">
-    <br>
-    {% if not flag_dbempty %}
-    <button type="submit" class="btn btn-primary">Submit</button>
-    {% endif %}
-  </form>
+ <div class="form-answers">
+     <!-- Option 1 -->
+     <div class="form-check">
+         <input 
+             class="form-check-input" 
+             type="radio" 
+             name="{{ q.question }}" 
+             id="gridRadios1_{{ forloop.counter }}" 
+             value="option1">
+         <label for="gridRadios1_{{ forloop.counter }}">{{ q.op1 }}</label>
+     </div>
+
+     <!-- Option 2 -->
+     <div class="form-check">
+         <input 
+             class="form-check-input" 
+             type="radio" 
+             name="{{ q.question }}" 
+             id="gridRadios2_{{ forloop.counter }}" 
+             value="option2">
+         <label for="gridRadios2_{{ forloop.counter }}">{{ q.op2 }}</label>
+     </div>
+
+     <!-- Option 3 -->
+     <div class="form-check">
+         <input 
+             class="form-check-input" 
+             type="radio" 
+             name="{{ q.question }}" 
+             id="gridRadios3_{{ forloop.counter }}" 
+             value="option3">
+         <label for="gridRadios3_{{ forloop.counter }}">{{ q.op3 }}</label>
+     </div>
+
+     <!-- Option 4 -->
+     <div class="form-check">
+         <input 
+             class="form-check-input" 
+             type="radio" 
+             name="{{ q.question }}" 
+             id="gridRadios4_{{ forloop.counter }}" 
+             value="option4">
+         <label for="gridRadios4_{{ forloop.counter }}">{{ q.op4 }}</label>
+     </div>
+ </div>
+ <br>
+ {% endfor %}
+
+ <!-- Timer -->
+ <input id="timer" type="hidden" name="timer" value="">
+ <br>
+
+ <!-- Submit Button -->
+ {% if not flag_dbempty %}
+ <button type="submit" class="btn btn-primary">Submit</button>
+ {% endif %}
+</form>
+
+
+<script nonce="{{ request.csp_nonce }}">
+ let quizInstance;
+
+ function formIsValid() {
+    for (const answer of quizInstance?.answers) {
+        const hasChecked = answer.querySelector("input[type='radio']:checked");
+        if (!hasChecked) {
+            console.log("You haven't selected a multiple-choice answer for this question.");
+            return false;
+        }
+    }
+    return true;
+}
+
+
+ function registerEventListeners() {
+     if (quizInstance?.multipleChoiceQuiz) {
+         quizInstance?.multipleChoiceQuiz.addEventListener("submit", (event) => {
+             event.preventDefault();
+             let formValid = formIsValid();
+             if (formValid) {
+                 stopTimer(); // Stop the timer on submit
+                 quizInstance?.multipleChoiceQuiz.submit();
+             } else {
+                 alert("You haven't selected a multiple-choice answer for one or more questions.");
+             }
+         });
+     } else {
+         console.error("QuizInstance or multipleChoiceQuiz is not properly initialized.");
+     }
+ }
+
+ function incrementTimer() {
+     quizInstance.seconds += 1;
+     quizInstance.timer.innerHTML = `<strong>Timer: ${quizInstance.seconds} seconds</strong>`;
+     quizInstance.inputTimer.value = quizInstance.seconds;
+ }
+
+ function setTimer() {
+     console.log("Timer set");
+     quizInstance.timerInterval = setInterval(incrementTimer, 1000);
+ }
+
+ function stopTimer() {
+     clearInterval(quizInstance.timerInterval);
+ }
+
+ document.addEventListener("DOMContentLoaded", () => {
+     quizInstance = new QuizInstance();
+     registerEventListeners();
+     setTimer();
+ });
+
+</script>
 
 {% endblock content %}
-
-<script nonce="{{ request.csp_nonce }}">
-  const validateForm =()=>{
-
-    // Select elements with the class "questions-test"
-    const questions = document.querySelectorAll(".questions-test")
-    const selections = document.querySelectorAll(".form-check-input")
-
-    const mutiple_choice_answers_length = 4
-    let checked_flag = false
-    let form_valid = true
-
-    let i=0
-
-    if(selections.length > 0){
-        selections.forEach((selection)=>{
-            i+=1
-            //console.log("selections length is ",selections.length)
-            if(selection.checked){
-                checked_flag=true
-                let selection_value = selection.value
-                console.log("Here is the selection value ",selection_value)
-            }
-            else{
-
-                if(i==mutiple_choice_answers_length){
-                    if(checked_flag==false){
-                        console.log("You haven't selected a multiple choice answer for this question ")
-                        form_valid=false
-                    }
-                    else{
-                        checked_flag=false
-                    }
-                    i=0
-                }
-            }
-                    
-        })
-            
-    }
-     
-    // Check if any elements were found
-    if (questions.length > 0) {
-        questions.forEach((question) => {
-            let text = question.textContent;
-            console.log(text);
-        });
-    } else {
-        console.log("No elements with class 'questions-test' found.");
-    }
-
-  // end function validateForm
-    return form_valid
-  }
-
-    form_multiple_choice_quiz=document.getElementById("form-multiple-choice-quiz")
-    form_multiple_choice_quiz.addEventListener(("submit"),(event)=>{
-        event.preventDefault()
-        form_valid = validateForm()
-        if(form_valid){
-            form_multiple_choice_quiz.submit()
-        }
-        else{
-            window.alert("You haven't selected a multiple choice answer for one or more questions")
-        }
-    })
-
-</script>
-
-<script nonce="{{ request.csp_nonce }}">
-
-    const timer=document.querySelector('#displaytimer')
-    const inputtag = document.querySelector('#timer')
-
-    let t=0
-
-    function setTimer(){
-     t+=1
-     timer.innerHTML ="<strong>Timer: " +t+" seconds</strong>"
-     inputtag.value = t
-    }
-
-    setInterval(setTimer, 1000)
-</script>
