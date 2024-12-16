@@ -72,7 +72,6 @@ def getQuiz(request):
                 selected = selections[i]#gets question from QuesModel
                 print('selected is ',selected)
                 if selected=="option1":#gets question with the 'option1' value of form radio button selected
-
                     if q.op1 == q.ans:
                         print('You have chosen the correct verse.', q.op1)
                         score+=10
@@ -80,11 +79,7 @@ def getQuiz(request):
                         correct_answers.append(str(q)+' - '+str(q.ans))
                     else:
                         wrong_answers.append(str(q)+' - '+str(q.ans))
-
-
-
                 if selected=="option2":
-
                     if q.op2 == q.ans:
                         print('You have chosen the correct verse.', q.op2)
                         score+=10
@@ -93,9 +88,7 @@ def getQuiz(request):
                     else:
                         wrong_answers.append(str(q)+' - '+str(q.ans))
 
-
                 if selected=="option3":
-
                     if q.op3 == q.ans:
                         print('You have chosen the correct verse.', q.op3)
                         score+=10
