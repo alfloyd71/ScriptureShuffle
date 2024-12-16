@@ -12,20 +12,19 @@ Bible Quiz - Here are the results.
             <img class="card-img-top" src="/static/quiz/images/bible.png" alt="bible png">
             <div class="card-body">
                 <h5 class="card-title">Score: {{score}}</h5>
-
-                <p class="card-text">Percentage: {{percent}}%</p>
-                <p class="card-text">Time Taken: {{time}} seconds</p>
-                <p class="card-text">Correct answers: {{correct}}</p>
-                <p class="card-text">Wrong answers: {{wrong}}</p>
-                <p class="card-text">Total questions: {{total}}</p>
+                <div class="card-text">Percentage: {{percent}}%</div>
+                <div class="card-text">Time Taken: {{time}} seconds</div>
+                <div class="card-text">Correct answers: {{correct}}</div>
+                <div class="card-text">Wrong answers: {{wrong}}</div>
+                <div class="card-text">Total questions: {{total}}</div>
                 <details>
-                    <summary>Correct Answers</summary>
+                    <summary class="details">Correct Answers</summary>
                     {% for each_correct_answer in correct_answers %}
                     <ul><li>{{ each_correct_answer }}</li></ul>
                     {% endfor %}
                 </details>
                 <details>
-                    <summary>Wrong Answers</summary>
+                    <summary class="details">Wrong Answers</summary>
                     {% for each_wrong_answer in wrong_answers %}
                     <ul><li>{{ each_wrong_answer }}</li></ul>
                     {% endfor %}

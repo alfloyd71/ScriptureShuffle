@@ -28,11 +28,29 @@ h1{
  text-align: right;
 }
 
+.card-body{
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ gap: 2em;
+}
+
 #cardcolumns{
  padding: 10px;margin: 20px;
 }
 
-#card{
- width: 32rem;border: 5px black solid;
+.card-text{
+ font-family: Arial, Helvetica, sans-serif;
+ font-style: normal;
+ font-weight: 700;
 }
+
+.details{
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ font-style: normal;
+ font-weight: 800;
+ 
+}
+
+
 

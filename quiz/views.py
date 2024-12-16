@@ -45,7 +45,6 @@ def getQuiz(request):
             flag_dbempty = True
             break
 
-
     if request.method == 'POST':
         questions=list(request.POST.keys())[1:]
         selections=list(request.POST.values())[1:]
