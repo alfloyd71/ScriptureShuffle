@@ -6,7 +6,7 @@ Bible Quiz - Here are the results.
 
 <div class="result-container">
 
-    <div id = "cardcolumns" class="card-columns">
+    <div id = "card-columns" class="card-columns">
 
         <div id= "card" class="card">
             <img class="card-img-top" src="/static/quiz/images/bible.png" alt="bible png">
@@ -18,13 +18,13 @@ Bible Quiz - Here are the results.
                 <div class="card-text">Wrong answers: {{wrong}}</div>
                 <div class="card-text">Total questions: {{total}}</div>
                 <details>
-                    <summary class="details">Correct Answers</summary>
+                    <summary class="details">Correct</summary>
                     {% for each_correct_answer in correct_answers %}
                     <ul><li>{{ each_correct_answer }}</li></ul>
                     {% endfor %}
                 </details>
                 <details>
-                    <summary class="details">Wrong Answers</summary>
+                    <summary class="details">Wrong</summary>
                     {% for each_wrong_answer in wrong_answers %}
                     <ul><li>{{ each_wrong_answer }}</li></ul>
                     {% endfor %}

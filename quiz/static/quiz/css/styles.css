@@ -1,11 +1,11 @@
 body{
  padding-bottom: 1em;
- width: 95%;
+ width: 100%;
 }
 
 .result-container{
- width: 80%;
- margin-top: 50px;
+ margin: 50px auto;
+ margin-bottom: 0px;
  
 }
 
@@ -35,8 +35,11 @@ h1{
  gap: 2em;
 }
 
-#cardcolumns{
- padding: 10px;margin: 20px;
+.card-columns{
+ padding: 10px;
+ margin: 0px;
+ border: 0px solid blue;
+
 }
 
 .card-text{
@@ -49,7 +52,10 @@ h1{
  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
  font-style: normal;
  font-weight: 800;
- 
+}
+
+footer{
+ margin-top: 0px;
 }
 
 

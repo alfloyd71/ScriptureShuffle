@@ -131,7 +131,7 @@ def getQuiz(request):
             'wrong_answers':wrong_answers,
 
         }
-        return render(request,'quiz/result.html',context)
+        return render(request,'quiz/results.html',context)
     else:
 
 
