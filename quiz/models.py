@@ -1,6 +1,6 @@
 from django.db import models
-import datetime
- 
+from django.utils import timezone
+
 # Create your models here.
 class QuesModel(models.Model):
     question = models.CharField(max_length=600,null=True)#542 chars is the longest verse
@@ -10,8 +10,8 @@ class QuesModel(models.Model):
     op4 = models.CharField(max_length=200,null=True)
     ans = models.CharField(max_length=200,null=True)
 
-    #Page last updated
-    update_date = models.DateTimeField('Last Updated', default=datetime.datetime.now())
+    # Page last updated
+    update_date = models.DateTimeField('Last Updated', default=timezone.now)
     
     def __str__(self):
         return self.question

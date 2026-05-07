@@ -1,144 +1,210 @@
 {% extends 'quiz/dependencies.html' %}
+
 {% block description %}
+<meta name="description" content="Test your Bible knowledge with Scripture Shuffle - an interactive quiz app for Bible study students.">
 {% endblock description %}
-{% block title %}
-{% endblock title %}
+
+{% block title %}Scripture Shuffle - Bible Verse Quiz{% endblock title %}
+
 {% block content %}
+<div class="container">
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="app-logo">
+      <img src="/static/quiz/images/icons/custom-logo.svg" alt="" aria-hidden="true">
+      <h1 class="app-title">Scripture Shuffle</h1>
+    </div>
+    <p class="app-description">
+      Test your Bible knowledge and strengthen your Scripture memorization. 
+      Open source and available on 
+      <a href="https://github.com/alfloyd71/ScriptureShuffle" target="_blank" rel="noopener noreferrer">GitHub</a>.
+    </p>
+  </header>
 
-<div class="container ">
-    
-<!-- your own custom logo and <h1> title goes here -->
-<h1><img src="/static/quiz/images/icons/custom-logo.svg" alt="custom-logo.svg"> Scripture Shuffle</h1> is released under the MIT License, and all of its source code is available at <a target="_blank" rel="noopener" href="https://github.com/alfloyd71/ScriptureShuffle">https://github.com/alfloyd71/ScriptureShuffle</a>
+  {% if flag_dbempty %}
+  <!-- Empty State -->
+  <div class="empty-state" role="alert">
+    <div class="empty-state-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+      </svg>
+    </div>
+    <h2>No Verses Available</h2>
+    <p>{{ dbempty_message }}</p>
+  </div>
+  {% else %}
+  
+  <!-- Stats Badge -->
+  <div class="text-center" style="margin-bottom: var(--spacing-xl);">
+    <div class="stats-badge" role="status" aria-live="polite">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+      </svg>
+      <span><strong>{{ number_of_verses }}</strong> verses available</span>
+      <span aria-hidden="true">|</span>
+      <span>Updated: {{ update_date }}</span>
+    </div>
+  </div>
 
-{% if flag_dbempty %}
-{{ dbempty_message }}
-{% else %}
-<p><strong>Database contains {{ number_of_verses }} Bible verses. Updated on: {{ update_date }}</strong></p>
-<div id="display-timer">
-    <b>Timer: 0 seconds</b>
+  <!-- Timer Display -->
+  <div id="display-timer" role="timer" aria-live="polite" aria-atomic="true">
+    <span class="sr-only">Quiz timer:</span>
+    <strong>0 seconds</strong>
+  </div>
+
+  <!-- Quiz Form -->
+  <form 
+    id="form-multiple-choice-quiz" 
+    method="post" 
+    aria-label="Bible verse quiz"
+  >
+    {% csrf_token %}
+
+    {% for q in questions %}
+    <fieldset class="question-card">
+      <legend class="sr-only">Question {{ forloop.counter }}</legend>
+      
+      <!-- Question Number Badge -->
+      <span class="question-number" aria-hidden="true">{{ forloop.counter }}</span>
+      
+      <!-- Question -->
+      <div class="form-group">
+        <p class="questions-test" id="question-{{ forloop.counter }}">{{ q.question }}</p>
+      </div>
+
+      <!-- Answer Options -->
+      <div class="form-answers" role="radiogroup" aria-labelledby="question-{{ forloop.counter }}">
+        <!-- Option 1 -->
+        <label class="form-check">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            name="{{ q.question }}" 
+            id="gridRadios1_{{ q.question|slugify }}_{{ forloop.counter }}" 
+            value="option1"
+            aria-describedby="question-{{ forloop.counter }}"
+          >
+          <span>{{ q.op1 }}</span>
+        </label>
+
+        <!-- Option 2 -->
+        <label class="form-check">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            name="{{ q.question }}" 
+            id="gridRadios2_{{ q.question|slugify }}_{{ forloop.counter }}" 
+            value="option2"
+            aria-describedby="question-{{ forloop.counter }}"
+          >
+          <span>{{ q.op2 }}</span>
+        </label>
+
+        <!-- Option 3 -->
+        <label class="form-check">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            name="{{ q.question }}" 
+            id="gridRadios3_{{ q.question|slugify }}_{{ forloop.counter }}" 
+            value="option3"
+            aria-describedby="question-{{ forloop.counter }}"
+          >
+          <span>{{ q.op3 }}</span>
+        </label>
+
+        <!-- Option 4 -->
+        <label class="form-check">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            name="{{ q.question }}" 
+            id="gridRadios4_{{ q.question|slugify }}_{{ forloop.counter }}" 
+            value="option4"
+            aria-describedby="question-{{ forloop.counter }}"
+          >
+          <span>{{ q.op4 }}</span>
+        </label>
+      </div>
+    </fieldset>
+    {% endfor %}
+
+    <!-- Hidden Timer Input -->
+    <input id="timer" type="hidden" name="timer" value="">
+
+    <!-- Submit Button -->
+    <div class="text-center" style="margin-top: var(--spacing-lg);">
+      <button type="submit" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg>
+        Submit Quiz
+      </button>
+    </div>
+  </form>
+  {% endif %}
 </div>
-{% endif %}
-
-<form id="form-multiple-choice-quiz" method="post">
- {% csrf_token %}
-
- {% for q in questions %}
- <div class="form-group">
-     <!-- Question Label -->
-     <label class="questions-test">{{ q.question }}</label>
- </div>
-
- <div class="form-answers">
-     <!-- Option 1 -->
-     <div class="form-check">
-       <input 
-         class="form-check-input" 
-         type="radio" 
-         name="{{ q.question }}" 
-         id="gridRadios1_{{ q.question|slugify }}_{{ forloop.counter }}" 
-         value="option1">
-       <label for="gridRadios1_{{ q.question|slugify }}_{{ forloop.counter }}">{{ q.op1 }}</label>
-     </div>
-
-     <!-- Option 2 -->
-     <div class="form-check">
-      <input 
-        class="form-check-input" 
-        type="radio" 
-        name="{{ q.question }}" 
-        id="gridRadios2_{{ q.question|slugify }}_{{ forloop.counter }}" 
-        value="option2">
-      <label for="gridRadios2_{{ q.question|slugify }}_{{ forloop.counter }}">{{ q.op2 }}</label>
-    </div>
-
-     <!-- Option 3 -->
-     <div class="form-check">
-      <input 
-        class="form-check-input" 
-        type="radio" 
-        name="{{ q.question }}" 
-        id="gridRadios3_{{ q.question|slugify }}_{{ forloop.counter }}" 
-        value="option3">
-      <label for="gridRadios3_{{ q.question|slugify }}_{{ forloop.counter }}">{{ q.op3 }}</label>
-    </div>
-
-     <!-- Option 4 -->
-     <div class="form-check">
-      <input 
-        class="form-check-input" 
-        type="radio" 
-        name="{{ q.question }}" 
-        id="gridRadios4_{{ q.question|slugify }}_{{ forloop.counter }}" 
-        value="option4">
-      <label for="gridRadios4_{{ q.question|slugify }}_{{ forloop.counter }}">{{ q.op4 }}</label>
-    </div>
- </div>
- <br>
- {% endfor %}
-
- <!-- Timer -->
- <input id="timer" type="hidden" name="timer" value="">
- <br>
-
- <!-- Submit Button -->
- {% if not flag_dbempty %}
- <button type="submit" class="btn btn-primary">Submit</button>
- {% endif %}
-</form>
 
 <script nonce="{{ request.csp_nonce }}">
- let quizInstance;
+  let quizInstance;
 
- function formIsValid() {
+  function formIsValid() {
     for (const answer of quizInstance?.answers) {
-        const hasChecked = answer.querySelector("input[type='radio']:checked");
-        if (!hasChecked) {
-            console.log("You haven't selected a multiple-choice answer for this question.");
-            return false;
-        }
+      const hasChecked = answer.querySelector("input[type='radio']:checked");
+      if (!hasChecked) {
+        return false;
+      }
     }
     return true;
-}
+  }
 
+  function registerEventListeners() {
+    if (quizInstance?.multipleChoiceQuiz) {
+      quizInstance?.multipleChoiceQuiz.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let formValid = formIsValid();
+        if (formValid) {
+          stopTimer();
+          quizInstance?.multipleChoiceQuiz.submit();
+        } else {
+          // Create accessible alert
+          const alertDiv = document.createElement('div');
+          alertDiv.setAttribute('role', 'alert');
+          alertDiv.setAttribute('aria-live', 'assertive');
+          alertDiv.className = 'sr-only';
+          alertDiv.textContent = 'Please answer all questions before submitting.';
+          document.body.appendChild(alertDiv);
+          
+          alert("Please answer all questions before submitting the quiz.");
+          
+          // Remove after announcement
+          setTimeout(() => alertDiv.remove(), 1000);
+        }
+      });
+    }
+  }
 
- function registerEventListeners() {
-     if (quizInstance?.multipleChoiceQuiz) {
-         quizInstance?.multipleChoiceQuiz.addEventListener("submit", (event) => {
-             event.preventDefault();
-             let formValid = formIsValid();
-             if (formValid) {
-                 stopTimer(); // Stop the timer on submit
-                 quizInstance?.multipleChoiceQuiz.submit();
-             } else {
-                 alert("You haven't selected a multiple-choice answer for one or more questions.");
-             }
-         });
-     } else {
-         console.error("QuizInstance or multipleChoiceQuiz is not properly initialized.");
-     }
- }
+  function incrementTimer() {
+    quizInstance.seconds += 1;
+    const timerText = quizInstance.seconds === 1 ? 'second' : 'seconds';
+    quizInstance.timer.innerHTML = `<span class="sr-only">Quiz timer:</span><strong>${quizInstance.seconds} ${timerText}</strong>`;
+    quizInstance.inputTimer.value = quizInstance.seconds;
+  }
 
- function incrementTimer() {
-     quizInstance.seconds += 1;
-     quizInstance.timer.innerHTML = `<strong>Timer: ${quizInstance.seconds} seconds</strong>`;
-     quizInstance.inputTimer.value = quizInstance.seconds;
- }
+  function setTimer() {
+    quizInstance.timerInterval = setInterval(incrementTimer, 1000);
+  }
 
- function setTimer() {
-     console.log("Timer set");
-     quizInstance.timerInterval = setInterval(incrementTimer, 1000);
- }
+  function stopTimer() {
+    clearInterval(quizInstance.timerInterval);
+  }
 
- function stopTimer() {
-     clearInterval(quizInstance.timerInterval);
- }
-
- document.addEventListener("DOMContentLoaded", () => {
-     quizInstance = new QuizInstance();
-     registerEventListeners();
-     setTimer();
- });
-
+  document.addEventListener("DOMContentLoaded", () => {
+    quizInstance = new QuizInstance();
+    registerEventListeners();
+    setTimer();
+  });
 </script>
 
 {% endblock content %}

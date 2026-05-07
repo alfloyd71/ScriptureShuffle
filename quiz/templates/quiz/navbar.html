@@ -1,9 +1,75 @@
-<nav>
- <div class="toggle">
-     <button id="menu-button" aria-expanded="false" aria-controls="menu">Menu</button>
- </div>
- <div class="menu" id="menu">
-     <a class="nav-link" href="/">Home</a>
-     <a class="nav-link" href="{% url 'getQuiz' %}">Bible Quiz</a>
- </div>
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-container">
+    <!-- Brand/Logo -->
+    <a href="/" class="nav-brand" aria-label="Scripture Shuffle Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+        <path d="M12 6v7"></path>
+        <path d="M8 9h8"></path>
+      </svg>
+      <span>Scripture Shuffle</span>
+    </a>
+
+    <!-- Mobile Menu Toggle -->
+    <button 
+      class="menu-toggle" 
+      id="menu-toggle" 
+      aria-expanded="false" 
+      aria-controls="nav-menu"
+      aria-label="Toggle navigation menu"
+    >
+      <span class="hamburger-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu" id="nav-menu" role="menubar">
+      <a href="/" class="nav-link" role="menuitem">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+          <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        </svg>
+        Home
+      </a>
+      <a href="{% url 'getQuiz' %}" class="nav-link" role="menuitem">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+        Bible Quiz
+      </a>
+    </div>
+
+    <!-- Navigation Actions -->
+    <div class="nav-actions">
+      <button 
+        class="theme-toggle" 
+        id="theme-toggle" 
+        type="button"
+        aria-label="Toggle dark/light theme"
+        title="Toggle theme"
+      >
+        <!-- Sun Icon (for dark mode - click to go light) -->
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <!-- Moon Icon (for light mode - click to go dark) -->
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
 </nav>

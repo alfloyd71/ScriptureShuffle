@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zM208 80c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v48h48c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272V304c0 8.8-7.2 16-16 16H224c-8.8 0-16-7.2-16-16V192H160c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16h48V80z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Bible -->
+  <rect x="20" y="10" width="60" height="80" rx="5" ry="5" fill="#8B4513" stroke="#5A2D0C" stroke-width="3"/>
+  <line x1="20" y1="10" x2="20" y2="90" stroke="#FFF" stroke-width="3"/>
+  <line x1="30" y1="10" x2="30" y2="90" stroke="#FFF" stroke-width="1"/>
+  
+  <!-- KJV Text -->
+  <text x="50" y="50" font-family="Arial, sans-serif" font-size="18" fill="#FFD700" text-anchor="middle" alignment-baseline="middle">KJV</text>
+
+
+  
+  <!-- Stack of Flashcards -->
+  <rect x="65" y="10" width="20" height="25" rx="2" ry="2" fill="#3498db" stroke="#2980b9" stroke-width="2" transform="rotate(10 65 10)"/>
+  <rect x="70" y="15" width="20" height="25" rx="2" ry="2" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" transform="rotate(10 70 15)"/>
+  <rect x="75" y="20" width="20" height="25" rx="2" ry="2" fill="#e74c3c" stroke="#c0392b" stroke-width="2" transform="rotate(10 75 20)"/>
+  
+ 
+</svg>

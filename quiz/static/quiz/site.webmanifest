@@ -1,0 +1,33 @@
+{
+    "lang": "en-us",
+    "name": "Scripture Shuffle",
+    "short_name": "Scripture Shuffle",
+    "description": "Test your Bible knowledge with an interactive quiz app designed for Bible study students. Features randomly selected verses from your personally curated collection.",
+    "start_url": "/scriptureshuffle/",
+    "background_color": "#0a0a0b",
+    "theme_color": "#0a0a0b",
+    "orientation": "portrait",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "/static/quiz/images/icons/pwa/android-splashscreen.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/static/quiz/images/icons/pwa/android-homescreen.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/static/quiz/images/icons/pwa/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "categories": ["education", "lifestyle"],
+    "prefer_related_applications": false
+}

@@ -1,68 +1,115 @@
 {% extends 'quiz/dependencies.html' %}
-{% block title %}
-Bible Quiz - Here are the results.
-{% endblock title %}
+
+{% block title %}Quiz Results - Scripture Shuffle{% endblock title %}
+
 {% block content %}
+<div class="container">
+  <div class="result-container">
+    <article class="results-card" aria-labelledby="results-heading">
+      <!-- Results Header -->
+      <header class="results-header">
+        <img src="/static/quiz/images/bible.png" alt="" aria-hidden="true">
+        <h1 id="results-heading" class="sr-only">Quiz Results</h1>
+        <div class="results-score" aria-label="Your score">{{ score }}</div>
+        <p class="results-subtitle">{{ percent }}% Accuracy</p>
+      </header>
 
-<div class="result-container">
-
-    <div id = "card-columns" class="card-columns">
-
-        <div id= "card" class="card">
-            <img class="card-img-top" src="/static/quiz/images/bible.png" alt="bible png">
-            <div class="card-body">
-                <h5 class="card-title">Score: {{score}}</h5>
-                <div class="card-text">Percentage: {{percent}}%</div>
-                <div class="card-text">Time Taken: {{time}} seconds</div>
-                <div class="card-text">Correct answers: {{correct}}</div>
-                <div class="card-text">Wrong answers: {{wrong}}</div>
-                <div class="card-text">Total questions: {{total}}</div>
-                <details>
-                    <summary class="details">Correct</summary>
-                    {% for each_correct_answer in correct_answers %}
-                    <ul><li>{{ each_correct_answer }}</li></ul>
-                    {% endfor %}
-                </details>
-                <details>
-                    <summary class="details">Wrong</summary>
-                    {% for each_wrong_answer in wrong_answers %}
-                    <ul><li>{{ each_wrong_answer }}</li></ul>
-                    {% endfor %}
-                </details>
-                <h5>All the best for <a id="takeAnotherQuiz" href="{% url 'getQuiz' %}">next quiz!</a></h5>
-            </div>
+      <!-- Results Body -->
+      <div class="results-body">
+        <!-- Stats Grid -->
+        <div class="stats-grid" role="list" aria-label="Quiz statistics">
+          <div class="stat-item" role="listitem">
+            <span class="stat-value">{{ time }}</span>
+            <span class="stat-label">Seconds</span>
+          </div>
+          <div class="stat-item" role="listitem">
+            <span class="stat-value">{{ total }}</span>
+            <span class="stat-label">Questions</span>
+          </div>
+          <div class="stat-item success" role="listitem">
+            <span class="stat-value">{{ correct }}</span>
+            <span class="stat-label">Correct</span>
+          </div>
+          <div class="stat-item error" role="listitem">
+            <span class="stat-value">{{ wrong }}</span>
+            <span class="stat-label">Wrong</span>
+          </div>
         </div>
-    </div>
 
+        <!-- Answers Accordion -->
+        <div class="answers-accordion">
+          <!-- Correct Answers -->
+          <details>
+            <summary class="correct-summary">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: inline; vertical-align: middle; margin-right: 8px;">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <path d="m9 11 3 3L22 4"></path>
+                </svg>
+                Correct Answers ({{ correct }})
+              </span>
+            </summary>
+            <div class="details-content">
+              {% if correct_answers %}
+              <ul role="list">
+                {% for each_correct_answer in correct_answers %}
+                <li>{{ each_correct_answer }}</li>
+                {% endfor %}
+              </ul>
+              {% else %}
+              <p style="color: var(--color-text-muted); font-size: 0.875rem;">No correct answers.</p>
+              {% endif %}
+            </div>
+          </details>
+
+          <!-- Wrong Answers -->
+          <details>
+            <summary class="wrong-summary">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: inline; vertical-align: middle; margin-right: 8px;">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="m15 9-6 6"></path>
+                  <path d="m9 9 6 6"></path>
+                </svg>
+                Wrong Answers ({{ wrong }})
+              </span>
+            </summary>
+            <div class="details-content">
+              {% if wrong_answers %}
+              <ul role="list">
+                {% for each_wrong_answer in wrong_answers %}
+                <li>{{ each_wrong_answer }}</li>
+                {% endfor %}
+              </ul>
+              {% else %}
+              <p style="color: var(--color-text-muted); font-size: 0.875rem;">No wrong answers. Perfect score!</p>
+              {% endif %}
+            </div>
+          </details>
+        </div>
+
+        <!-- Next Quiz Link -->
+        <div class="next-quiz">
+          <a href="{% url 'getQuiz' %}" id="takeAnotherQuiz">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+              <path d="M3 3v5h5"></path>
+              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+              <path d="M16 21h5v-5"></path>
+            </svg>
+            Take Another Quiz
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
 </div>
-
 {% endblock content %}
 
-<!-- footer goes here...-->
 {% block footer %}
-<footer class="footer py-5">
-    <div class="container">
-      <div class="row">
-         <div class="col-12 mx-auto text-center mt-1">
-            <p class="mb-0 text-secondary">
-              &copy2024 YourWebsite.com   
-             </p>
-          </div>
-      
-      </div>
-    </div>
-  </footer>
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <p>&copy; 2026 Scripture Shuffle. Built for Bible study students.</p>
+  </div>
+</footer>
 {% endblock footer %}
-
-{% block script %}
-<script nonce = "{{ request.csp_nonce }}">
-    // Check if the device is a mobile phone
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        let card = document.getElementById("card")
-        card.style.width="100%"
-        //console.log("This app is running on a mobile device.")
-    }
-    
-</script>
-
-{% endblock script %}

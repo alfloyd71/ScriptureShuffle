@@ -1,20 +1,187 @@
-# Scripture Shuffle: Random Verse Challenge 
-This fully functional Django application empowers your users to embark on a multiple-choice quiz featuring your personally curated selection of Bible verses sourced from the King James Version (KJV). With every quiz, participants encounter a fresh array of randomly selected verses, ensuring each Bible challenge remains uniquely engaging and enriching. 
+# Scripture Shuffle
 
-The only other requirement besides Django is to install the pythonbible package: 
+<p align="center">
+  <img src="https://www.freesmartphoneapps.com/static/quiz/images/ScriptureShuffleScreenshot.png" alt="Scripture Shuffle App Screenshot" width="300">
+</p>
 
+<p align="center">
+  <strong>A Random Bible Verse Quiz Challenge</strong>
+</p>
+
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#demo">Demo</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#configuration">Configuration</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a>
+</p>
+
+---
+
+## Overview
+
+Scripture Shuffle is a fully functional Django application that empowers users to embark on a multiple-choice quiz featuring personally curated Bible verses sourced from the King James Version (KJV). With every quiz, participants encounter a fresh array of randomly selected verses, ensuring each Bible challenge remains uniquely engaging and enriching.
+
+Perfect for:
+- Bible study groups
+- Personal Scripture memorization practice
+
+## Features
+
+- **Randomized Quizzes** - Each quiz presents a unique selection of verses from your database
+- **Multiple Choice Format** - Four answer options per question for engaging gameplay
+- **Built-in Timer** - Track how long it takes to complete each quiz
+- **Score Tracking** - See your correct/incorrect answers with detailed results
+- **Responsive Design** - Works on desktop, tablet, and mobile devices
+- **Admin Interface** - Easy verse management through Django's admin panel
+- **Accessible** - Built with ARIA labels and screen reader support
+
+## Demo
+
+**Live Demo:** [https://www.freesmartphoneapps.com/scriptureshuffle/](https://www.freesmartphoneapps.com/scriptureshuffle/)
+
+## Requirements
+
+- Python 3.8+
+- Django 4.0+
+- pythonbible
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/alfloyd71/ScriptureShuffle.git
+cd ScriptureShuffle
+```
+
+### 2. Create a Virtual Environment (Recommended)
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install django
 pip install pythonbible
+```
 
-![ScriptureShuffleAndroid.png](https://www.freesmartphoneapps.com/static/projects/images/ScriptureShuffleAndroid-ver1.2.png)
+### 4. Apply Database Migrations
 
-Add multiple choice verses in Admin like so:
+```bash
+python manage.py migrate
+```
 
-![AdminQuesmodelScreenshot1.png](https://www.freesmartphoneapps.com/static/projects/images/AdminQuesmodelScreenshot.png)
+### 5. Create a Superuser
 
-The QuesModel Model has been pre-registered and should show up in Admin for editing
+```bash
+python manage.py createsuperuser
+```
 
-![AdminQuesmodelScreenshot2.png](https://www.freesmartphoneapps.com/static/projects/images/AdminQuesmodelScreenshot2.png)
+### 6. Run the Development Server
 
-The final step is to customize the 'verses_limit_range' variable in the views.py file to select the desired number of multiple-choice verses for the Bible quiz. Ensure that the number of verses in the database is equal to or exceeds the value set in the 'verses_limit_range' setting; otherwise, the verses will not be displayed.
+```bash
+python manage.py runserver
+```
 
-https://www.freesmartphoneapps.com/scriptureshuffle/
+Visit `http://127.0.0.1:8000` to see the app, and `http://127.0.0.1:8000/admin` to add verses.
+
+## Configuration
+
+### Setting the Number of Quiz Questions
+
+Customize the number of verses displayed per quiz by editing the `verses_limit_range` variable in `views.py`:
+
+```python
+# Customize to the number of random verses for each quiz
+verses_limit_range = 5  # Default: 5 questions per quiz
+```
+
+> **Note:** Ensure your database contains at least as many verses as specified in `verses_limit_range`, otherwise the quiz will not display.
+
+### Adding Bible Verses
+
+1. Navigate to the Django Admin panel (`/admin`)
+2. Log in with your superuser credentials
+3. Click on **Ques models** to add new verses
+
+<p align="center">
+  <img src="https://www.freesmartphoneapps.com/static/quiz/images/AdminQuesmodelScreenshot.png" alt="Adding verses in Admin" width="600">
+</p>
+
+Each verse entry requires:
+- **Question** - The Bible verse text (up to 600 characters)
+- **Option 1-4** - Four possible book/chapter/verse references
+- **Answer** - The correct reference
+
+<p align="center">
+  <img src="https://www.freesmartphoneapps.com/static/quiz/images/AdminQuesmodelScreenshot2.png" alt="Admin QuesModel listing" width="600">
+</p>
+
+## Project Structure
+
+```
+ScriptureShuffle/
+├── migrations/           # Database migrations
+├── static/quiz/
+│   ├── css/             # Stylesheets
+│   ├── fonts/           # Bootstrap glyphicons
+│   ├── images/          # App icons and images
+│   └── js/              # JavaScript files
+├── templates/quiz/
+│   ├── dependencies.html # Base template with CSS/JS includes
+│   ├── home.html        # Main quiz page
+│   ├── navbar.html      # Navigation component
+│   └── results.html     # Quiz results page
+├── admin.py             # Admin configuration
+├── apps.py              # App configuration
+├── forms.py             # Django forms
+├── models.py            # Database models
+├── urls.py              # URL routing
+└── views.py             # View logic
+```
+
+## Data Model
+
+The `QuesModel` stores quiz questions with the following fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `question` | CharField(600) | The Bible verse text |
+| `op1` | CharField(200) | First answer option |
+| `op2` | CharField(200) | Second answer option |
+| `op3` | CharField(200) | Third answer option |
+| `op4` | CharField(200) | Fourth answer option |
+| `ans` | CharField(200) | The correct answer |
+| `update_date` | DateTimeField | Last modification timestamp |
+
+## Screenshots
+
+### Quiz Interface
+The main quiz presents randomized verses with multiple-choice answers and a running timer.
+![Quiz](https://www.freesmartphoneapps.com/static/quiz/images/QuizPage.png)
+
+### Results Page
+After submission, view your score, time taken, and review correct/incorrect answers.
+![Results](https://www.freesmartphoneapps.com/static/quiz/images/Results.png)
+
+## License
+
+This project is open source and available under the [MIT License](https://github.com/alfloyd71/ScriptureShuffle?tab=MIT-1-ov-file#readme).
+
+## Acknowledgments
+
+- Bible verses sourced from the King James Version (KJV)
+- Built with [Django](https://www.djangoproject.com/)
+- Uses [pythonbible](https://github.com/avendesora/pythonbible) for Bible reference parsing
+
+---
+
+<p align="center">
+  Made with faith and code
+</p>
