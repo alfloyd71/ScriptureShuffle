@@ -1,10 +1,6 @@
 # Scripture Shuffle
 
 <p align="center">
-  <img src="https://www.freesmartphoneapps.com/static/quiz/images/ScriptureShuffleScreenshot.png" alt="Scripture Shuffle App Screenshot" width="300">
-</p>
-
-<p align="center">
   <strong>A Random Bible Verse Quiz Challenge</strong>
 </p>
 
@@ -23,6 +19,11 @@
 ## Overview
 
 Scripture Shuffle is a fully functional Django application that empowers users to embark on a multiple-choice quiz featuring personally curated Bible verses sourced from the King James Version (KJV). With every quiz, participants encounter a fresh array of randomly selected verses, ensuring each Bible challenge remains uniquely engaging and enriching.
+
+## Screenshots
+<p align="center">
+  <img width="300" src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/quiz.jpg" alt="Quiz page dark mode">&nbsp;&nbsp;<img width="300" src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/results.jpg" alt="Results page light mode">
+</p>
 
 Perfect for:
 - Bible study groups
