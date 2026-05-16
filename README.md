@@ -10,7 +10,7 @@
   <a href="#installation">Installation</a> •
   <a href="#configuration">Configuration</a> •
   <a href="#usage">Usage</a> •
-  <a href="#contributing">Contributing</a> •
+  <a href="#project-structure">Project Structure</a> •
   <a href="#license">License</a>
 </p>
 
@@ -123,6 +123,40 @@ Each verse entry requires:
 <p align="center">
   <img src="https://www.freesmartphoneapps.com/static/quiz/images/AdminQuesmodelScreenshot2.png" alt="Admin QuesModel listing" width="600">
 </p>
+
+---
+
+## Usage
+
+### Taking a Quiz
+
+1. **Start the Quiz** - Visit the homepage at `http://127.0.0.1:8000` to begin a new quiz
+2. **Answer Questions** - For each verse displayed, select the correct book, chapter, and verse reference from the four multiple-choice options
+3. **Track Your Time** - A timer runs throughout the quiz to track your completion speed
+4. **Submit Answers** - Once you've answered all questions, click the submit button to see your results
+5. **Review Results** - View your score, time taken, and a breakdown of correct and incorrect answers
+
+### Managing Verses
+
+1. **Access Admin Panel** - Navigate to `http://127.0.0.1:8000/admin` and log in with your superuser credentials
+2. **Add New Verses** - Click on "Ques models" → "Add" to create new quiz questions
+3. **Edit Existing Verses** - Click on any verse in the list to modify its content
+4. **Delete Verses** - Select verses and use the delete action to remove them
+
+### Example Verse Entry
+
+When adding a verse through the admin panel:
+
+| Field | Example Value |
+|-------|---------------|
+| Question | "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." |
+| Option 1 | John 3:16 |
+| Option 2 | Romans 8:28 |
+| Option 3 | Psalm 23:1 |
+| Option 4 | Proverbs 3:5 |
+| Answer | John 3:16 |
+
+> **Tip:** Ensure the answer field exactly matches one of the four options.
 
 ## Project Structure
 
