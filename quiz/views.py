@@ -111,9 +111,9 @@ def getQuiz(request):
             except QuesModel.MultipleObjectsReturned:
                 print('Multiple questions returned for the same question text')
 
-        total = len(quests_limit)
-        wrong = total - correct
-        score = round((correct/total)*100)
+        wrong = len(wrong_answers)
+        total = correct + wrong
+        score = round((correct/total)*100) if total > 0 else 0
 
         print('Answers you got correct: ',correct_answers)
         print('Answers you got wrong: ', wrong_answers)
