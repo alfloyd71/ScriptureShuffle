@@ -196,10 +196,12 @@ The `QuesModel` stores quiz questions with the following fields:
 | `update_date` | DateTimeField | Last modification timestamp |
 
 ## Screenshots
+<p align="center">
+  <img src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/progress-bar.jpg" alt="Edit Verses" width="300">&nbsp;&nbsp;<img src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/quiz-questions.jpg" alt="Study Boxes" width="300">
+</p>
 
 ### Quiz Interface
 The main quiz presents randomized verses with multiple-choice answers and a running timer.
-![Quiz](https://www.freesmartphoneapps.com/static/quiz/images/QuizPage.png)
 
 ### Results Page
 After submission, view your score, time taken, and review correct/incorrect answers.
