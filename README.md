@@ -22,7 +22,7 @@ Scripture Shuffle is a fully functional Django application that empowers users t
 
 ## Screenshots
 <p align="center">
-  <img width="300" src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/quiz.jpg" alt="Quiz page dark mode">&nbsp;&nbsp;<img width="300" src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/results.jpg" alt="Results page light mode">
+  <img src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/progress-bar.jpg" alt="Progress Bar" width="300">&nbsp;&nbsp;<img src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/quiz-questions.jpg" alt="Quiz Questions" width="300">
 </p>
 
 Perfect for:
@@ -194,11 +194,6 @@ The `QuesModel` stores quiz questions with the following fields:
 | `op4` | CharField(200) | Fourth answer option |
 | `ans` | CharField(200) | The correct answer |
 | `update_date` | DateTimeField | Last modification timestamp |
-
-## Screenshots
-<p align="center">
-  <img src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/progress-bar.jpg" alt="Edit Verses" width="300">&nbsp;&nbsp;<img src="https://www.freesmartphoneapps.com/static/quiz/images/screenshots/quiz-questions.jpg" alt="Study Boxes" width="300">
-</p>
 
 ### Quiz Interface
 The main quiz presents randomized verses with multiple-choice answers and a running timer.
